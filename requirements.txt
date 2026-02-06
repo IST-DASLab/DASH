@@ -3,6 +3,7 @@ torchvision
 torchaudio
 triton
 ista-daslab-optimizers
+huggingface-hub
 gridsearcher
 tiktoken
 datasets

@@ -44,17 +44,15 @@ cd $ROOT
 conda create --name DASH python=3.12 -c conda-forge --override-channels -y
 conda activate DASH
 
-######################### HuggingFace
-pip install huggingface-hub
-# make sure you are logged in (we skip the login part to HuggingFace, please do that yourself!)
-
 ######################### CLONE DASH (THIS REPO)
 git clone git@github.com:IST-DASLab/DASH.git
 cd $ROOT/DASH
 
+######################### REQUIREMENTS & LOGINs
 pip install -r requirements.txt
+# make sure you are logged to HuggingFace and WandB (we skip the login part, please do that yourself!)
 
-######################### INSTALL DISTRIBUTED SHAMPOO WITH CHANGES INTRODUCED IN DASH
+######################### INSTALL OUR FORK OF DISTRIBUTED SHAMPOO WITH CHANGES INTRODUCED IN DASH
 cd $ROOT
 git clone git@github.com:IST-DASLab/DASH_DistributedShampoo.git
 cd distributed_shampoo
