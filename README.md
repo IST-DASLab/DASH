@@ -1,9 +1,33 @@
 # Codebase for [DASH: Faster Shampoo via Batched Block Preconditioning and Efficient Inverse-Root Solvers](https://arxiv.org/pdf/2602.02016)
 
-## Quickstart
+This repository contains the code for DASH (**D**istributed **A**ccelerated **SH**ampoo), a faster implementation of DistributedShampoo 
+optimizer. We summarize our contribution as follows:
 
+- Our key observation is that DistributedShampoo processes the preconditioner blocks sequentially, which make it slow. In **DASH**, we
+  stack the blocks with the same size in a 3D tensor and process them in parallel to increase the GPU utilization.
+- We investigate two new lienar algebraic approaches to compute matrix powers: **Newton-DB** and **Chebyshev polynomials via Clenshaw's 
+  algorithm**. **NewtonDB** achieves lowest validation perplexity, better than even **Eigen-Value Decomposition (EVD)**.
+- We probide a behavioral analysis of Newton-based iterations and show that scaling the matrices using Frobenius norm is suboptimal, 
+  thus requiring more iterations to reach the desired precision. We offer intuitive explanations between Coupled Newton and Newton-DB.
+- Our **DASH** implementation enables running Power-Iteration in an efficient way by estimating the largest eigenvectors in parallel to 
+  maximize GPU efficiency. On top of the parallelization introduced by stacking the matrices, we run Power-Iteration on multiple vectors 
+  at the same time to avoid getting stuck in a local maxima (we call this **Multi-Power-Iteration**).
+
+## **DASH** implementation
+Our implementation can be found in the repository [ISTA-DASLab-Optimizers](https://github.com/IST-DASLab/ISTA-DASLab-Optimizers). If you 
+follow the instructions in the **Reproducing Experiments**, the **DASH** implementation will be available via the 
+`ista-daslab-optimizers`, which is part of [requirements.txt](https://github.com/IST-DASLab/DASH/blob/main/requirements.txt#L5) file. 
+
+## Reproducing Experiments
 We use the C4 dataset from [ISTA-DASLab/C4-tokenized-llama2](https://huggingface.co/datasets/ISTA-DASLab/C4-tokenized-llama2) that is 
-already tokenized. You can find a script
+already tokenized. You can use [this script](https://github.com/IST-DASLab/DASH/blob/main/src/data/hf_hub_download.py) to download the 
+chunks of the tokenized C4 dataset from HuggingFace. 
+
+This repository is based on [llm-baselines](https://github.com/epfml/llm-baselines) from EPFL.
+
+We use [GridSearcher](https://github.com/IST-DASLab/GridSearcher) to efficiently run multiple grid-search configurations on a compute 
+node where we had access to 8x H100 GPUs. **GridSearcher** is automatically installed via the
+[requirements.txt](https://github.com/IST-DASLab/DASH/blob/main/requirements.txt#L13) file.
 
 ```bash
 #!/bin/bash
@@ -54,6 +78,30 @@ cd $ROOT/DASH/src
 python3 run_dash.py
 ```
 
-### Alternative to GridSearcher
+## Alternative to GridSearcher
 If you do not want to run experiments with GridSearcher, then you can only instruct it to return the bash command it runs by setting the
-flag `debug=True` when calling `gs.run(...)`. 
+flag `debug=True` when calling `gs.run(...)`.
+
+## Issues 🤝
+Please open an issue if you have questions, observations or find bugs in our code! We are open to discussions and we will try to address 
+them as soon as possible! Thank you in advance! 
+
+## Roadmap:
+- ⏳ Release model checkpoints on HuggingFace (work in progress)
+- ✅ Code Release: DASH (this repo) and in [ISTA-DASLab-Optimizers](https://github.com/IST-DASLab/ISTA-DASLab-Optimizers) (done on 
+  2026-feb-06)
+- ✅ Upload Paper on Arxiv (done on 2026-feb-02)
+
+## Citation
+If you find our work useful, please consider citing:
+```
+@misc{modoranu2026dash,
+      title={DASH: Faster Shampoo via Batched Block Preconditioning and Efficient Inverse-Root Solvers}, 
+      author={Ionut-Vlad Modoranu and Philip Zmushko and Erik Schultheis and Mher Safaryan and Dan Alistarh},
+      year={2026},
+      eprint={2602.02016},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2602.02016}, 
+}
+```
