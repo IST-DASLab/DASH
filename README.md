@@ -40,31 +40,27 @@ mkdir -p ${ROOT}/results
 
 cd $ROOT
 
-##### CREATE & ACTIVATE "DASH" ENVIRONMENT
+######################### CREATE & ACTIVATE "DASH" ENVIRONMENT
 conda create --name DASH python=3.12 -c conda-forge --override-channels -y
 conda activate DASH
-#########################
 
+######################### HuggingFace
 pip install huggingface-hub
+# make sure you are logged in (we skip the login part to HuggingFace, please do that yourself!)
 
-# we skip the login part to HuggingFace (please do that yourself)
-
-##### CLONE DASH (THIS REPO)
+######################### CLONE DASH (THIS REPO)
 git clone git@github.com:IST-DASLab/DASH.git
 cd $ROOT/DASH
-#########################
 
 pip install -r requirements.txt
 
-##### !!!!! Releasing This Fork is Work in Progress !!!!!
-###### INSTALL DISTRIBUTED SHAMPOO WITH CHANGES INTRODUCED IN DASH
-#cd $ROOT
-#git clone git@github.com:IST-DASLab/distributed_shampoo.git
-#cd distributed_shampoo
-#pip install -e .
-########################## END INSTALL DISTRIBUTED SHAMPOO
+######################### INSTALL DISTRIBUTED SHAMPOO WITH CHANGES INTRODUCED IN DASH
+cd $ROOT
+git clone git@github.com:IST-DASLab/DASH_DistributedShampoo.git
+cd distributed_shampoo
+pip install -e .
 
-##### DOWNLOAD C4 DATASET
+######################### DOWNLOAD THE TOKENIZED C4 DATASET
 HF_PATH_C4=ISTA-DASLab/C4-tokenized-llama2
 LOCAL_PATH_C4=/tmp/ISTA-DASLab/datasets/c4
 
@@ -72,9 +68,9 @@ python3 ${ROOT}/DASH/src/data/hf_hub_download.py --repo_id=$HF_PATH_C4 --local_d
 
 cd $LOCAL_PATH_C4
 cat chunk_* > train.bin
-######################### END DOWNLOAD C4 DATASET: Now we can use train.bin and val.bin from $LOCAL_PATH_C4
+# now we can use train.bin and val.bin from $LOCAL_PATH_C4
 
-##### RUN DASH WITH GridSearcher (REQUIRES DIRECT SSH ACCESS TO THE MACHINE WITH 8 GPUs)
+######################### RUN DASH WITH GridSearcher (REQUIRES DIRECT SSH ACCESS TO THE MACHINE WITH 8 GPUs)
 cd $ROOT/DASH/src
 python3 run_dash.py
 ```
@@ -89,7 +85,7 @@ them as soon as possible! Thank you in advance!
 
 ## Roadmap:
 - ⏳ Release model checkpoints on HuggingFace (work in progress)
-- ⏳ Release our fork of Distributed Shampoo (work in progress)
+- ✅ Release our fork of Distributed Shampoo (done on 2026-feb-06)
 - ✅ Code Release: DASH (this repo) and in [ISTA-DASLab-Optimizers](https://github.com/IST-DASLab/ISTA-DASLab-Optimizers) (done on 
   2026-feb-06)
 - ✅ Upload Paper on Arxiv (done on 2026-feb-02)
