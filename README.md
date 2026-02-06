@@ -56,12 +56,13 @@ cd $ROOT/DASH
 
 pip install -r requirements.txt
 
-##### INSTALL DISTRIBUTED SHAMPOO WITH CHANGES INTRODUCED IN DASH
-cd $ROOT
-git clone git@github.com:IST-DASLab/distributed_shampoo.git
-cd distributed_shampoo
-pip install -e .
-######################### END INSTALL DISTRIBUTED SHAMPOO
+##### !!!!! Releasing This Fork is Work in Progress !!!!!
+###### INSTALL DISTRIBUTED SHAMPOO WITH CHANGES INTRODUCED IN DASH
+#cd $ROOT
+#git clone git@github.com:IST-DASLab/distributed_shampoo.git
+#cd distributed_shampoo
+#pip install -e .
+########################## END INSTALL DISTRIBUTED SHAMPOO
 
 ##### DOWNLOAD C4 DATASET
 HF_PATH_C4=ISTA-DASLab/C4-tokenized-llama2
@@ -88,6 +89,7 @@ them as soon as possible! Thank you in advance!
 
 ## Roadmap:
 - ⏳ Release model checkpoints on HuggingFace (work in progress)
+- ⏳ Release our fork of Distributed Shampoo (work in progress)
 - ✅ Code Release: DASH (this repo) and in [ISTA-DASLab-Optimizers](https://github.com/IST-DASLab/ISTA-DASLab-Optimizers) (done on 
   2026-feb-06)
 - ✅ Upload Paper on Arxiv (done on 2026-feb-02)
