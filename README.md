@@ -76,8 +76,8 @@ python3 run_dash.py
 ```
 
 ## Alternative to GridSearcher
-If you do not want to run experiments with GridSearcher, then you can only instruct it to return the bash command it runs by setting the
-flag `debug=True` when calling `gs.run(...)`.
+If you do not want to run experiments with GridSearcher, then you can use it just to create the bash commands as a result of the 
+cartesian product of your grid runs by setting the flag `debug=True` when calling `gs.run(...)` [here](https://github.com/IST-DASLab/DASH/blob/main/src/run_dash.py#L267).
 
 ## Issues 🤝
 Please open an issue if you have questions, observations or find bugs in our code! We are open to discussions and we will try to address 
