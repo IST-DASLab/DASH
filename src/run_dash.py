@@ -34,7 +34,7 @@ def get_arg_parse():
     parser.add_argument('--wait_pids', nargs='+', default=None, required=False)
     parser.add_argument('--wait_secs', type=int, default=None, required=False)
     parser.add_argument('--wait_current', action="store_true", default=False)
-    parser.add_argument('--root', type=str, required=True)
+    parser.add_argument('--wandb_entity', type=str, required=True)
     return parser.parse_args()
 
 def add_model_params(model_size, tokens_ratio, seq_len, batch_size, acc_steps):
@@ -336,8 +336,7 @@ if __name__ == '__main__':
                     'dataset': [dataset],
                     'sequence_length': [SEQ_LEN],
                     'wandb_entity': [
-                        'ionutmodo',
-                        # 'ist',
+                        args.wandb_entity
                     ],
                     'data_seed': [########## change the seeds for reproducibility
                         42,

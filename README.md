@@ -70,7 +70,7 @@ cat chunk_* > train.bin
 
 ######################### RUN DASH WITH GridSearcher (REQUIRES DIRECT SSH ACCESS TO THE MACHINE WITH 8 GPUs)
 cd $ROOT/DASH/src
-python3 run_dash.py
+python3 run_dash.py --wandb_entity=ionutmodo # replace with your desired WandB entity
 ```
 
 ## Alternative to GridSearcher
