@@ -55,7 +55,7 @@ pip install -r requirements.txt
 ######################### INSTALL OUR FORK OF DISTRIBUTED SHAMPOO WITH CHANGES INTRODUCED IN DASH
 cd $ROOT
 git clone git@github.com:IST-DASLab/DASH_DistributedShampoo.git
-cd distributed_shampoo
+cd DASH_DistributedShampoo
 pip install -e .
 
 ######################### DOWNLOAD THE TOKENIZED C4 DATASET
