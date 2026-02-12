@@ -23,7 +23,6 @@ def get_pids_per_gpu():
     num_gpus = 8
     pids = [0] * num_gpus
     gpus = gpustat.new_query().gpus
-    breakpoint()
     for gid in range(num_gpus):
         for p in gpus[gid]['processes']:
             pids[gid] = p['pid']
@@ -298,8 +297,8 @@ if __name__ == '__main__':
     ########## here we start defining the values that will be used in the grid with for loops
     for ROOT_METHOD in [ ########## choose inverse root method from here (or all)
         'evd',
-        # 'ndb',
         # 'cn',
+        # 'ndb',
         # 'cbshv',
     ]:
         is_cn = ROOT_METHOD == 'cn'
@@ -361,25 +360,30 @@ if __name__ == '__main__':
                         # 'adamw',
                         'shmp',
                     ],
-                    'shmp_eps_inv_root': [ ########## regularization
-                        # '0',
-                        '1e-10',
-                    ],
-                    'shmp_inv_root_freq': [ ########## this is the FREQ from Table 1 (how often to compute the inverse roots)
-                        1,
-                        # 10,
-                    ],
-                    'shmp_matrix_scaling_type': [ ########## matrix scaling type
-                        # 'pi', # Power-Iteration
-                        'fro', # Frobenius norm
-                        # 'pim', # Power-Iteration-Multi
-                    ],
-                    'shmp_matmul_dtype': [ ########## desired precision (see CHECKS section from function main() in main.py)
-                        'fp32',
-                        # 'fp16',
-                        # 'bf16',
-                    ],
-
+                    'shmp_eps_inv_root': { ########## regularization
+                        'evd': ['1e-10'],
+                        'cn': ['0'],
+                        'ndb': ['0'],
+                        'cbshv': ['1e-10'],
+                    }[ROOT_METHOD],
+                    'shmp_inv_root_freq': { ########## this is the FREQ from Table 1 (how often to compute the inverse roots)
+                        'evd': [1, 10],
+                        'cn': [1],
+                        'ndb': [1],
+                        'cbshv': [1],
+                    }[ROOT_METHOD],
+                    'shmp_matrix_scaling_type': { ########## matrix scaling type
+                        'evd': ['fro'], # doesn't matter here
+                        'cn': ['fro'],
+                        'ndb': ['fro', 'pim'],
+                        'cbshv': ['fro'],
+                    }[ROOT_METHOD],
+                    'shmp_matmul_dtype': { ########## desired precision (see CHECKS section from function main() in main.py)
+                        'evd': ['fp32'], # doesn't matter here
+                        'cn': ['fp32', 'fp16'],
+                        'ndb': ['fp32'],
+                        'cbshv': ['fp32', 'fp16'],
+                    }[ROOT_METHOD],
                     ### DASH: EVD
                     'shmp_evd_heuristic': [ ########## we used "shmp" for paper to match DistributedShampoo, the others are experimental
                         # 'abs',
