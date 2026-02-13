@@ -82,7 +82,7 @@ Please open an issue if you have questions, observations or find bugs in our cod
 them as soon as possible! Thank you in advance! 
 
 ## Roadmap:
-- ⏳ Working on a more efficient version (work in progress)
+- ⏳ Working on an even more efficient version (work in progress)
 - ⏳ Release model checkpoints on HuggingFace (work in progress)
 - ✅ Release our fork of Distributed Shampoo (done on 2026-feb-06)
 - ✅ Code Release: DASH (this repo) and in [ISTA-DASLab-Optimizers](https://github.com/IST-DASLab/ISTA-DASLab-Optimizers) (done on 
