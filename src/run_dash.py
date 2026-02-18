@@ -297,8 +297,8 @@ if __name__ == '__main__':
     ########## here we start defining the values that will be used in the grid with for loops
     for ROOT_METHOD in [ ########## choose inverse root method from here (or all)
         'evd',
-        # 'cn',
-        # 'ndb',
+        'cn',
+        'ndb',
         # 'cbshv',
     ]:
         is_cn = ROOT_METHOD == 'cn'
@@ -320,9 +320,9 @@ if __name__ == '__main__':
             # (953, 2048, 20, 32, 64), # GlobalBatchSize = 2M for H100-80GB
         ]:
             for OPTIM, GPUS in [ ########## choose optimizer and GPUs
-                ('dash-gpu', [0, 1, 2, 3, 4, 5, 6, 7]), ########## DashGpu
-                ('dash-lw', [0, 1, 2, 3, 4, 5, 6, 7]), ########## DashLayerwise
-                ('dist-shmp', [0, 1, 2, 3, 4, 5, 6, 7]), ########## DistributedShampoo (our modified version)
+                ('dash-gpu', [0, 1, 2, 3, 4, 5, 6, 7]), # DashGpu
+                ('dash-lw', [0, 1, 2, 3, 4, 5, 6, 7]), # DashLayerwise
+                ('dist-shmp', [0, 1, 2, 3, 4, 5, 6, 7]), # DistributedShampoo (our fork where we integrated NDB and CN-FP16)
             ]:
                 ########## some stats for each model
                 eval_interval = {3: 10, 30: 10, 360: 50, 953: 100}[MODEL_SIZE] ########## how often to compute validation loss
