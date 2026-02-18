@@ -19,9 +19,9 @@ follow the instructions in the **Reproducing Experiments**, the **DASH** impleme
 `ista-daslab-optimizers`, which is part of [requirements.txt](https://github.com/IST-DASLab/DASH/blob/main/requirements.txt#L5) file.
 
 ### Available versions:
-1. **DashLayerwise**: this version performs stacking at each layer level and it was used to generate the results in
+1. **DashLayerwise** `(dash-lw)`: this version performs stacking at each layer level and it was used to generate the results in
 the paper  
-2. **DashGpu**: this version was developed after releasing the paper and it stacks all blocks from all layers
+2. **DashGpu** `(dash-gpu)`: this version was developed after releasing the paper and it stacks all blocks from all layers
 allocated to one GPU, which results in slightly faster running time and slightly higher memory consumption because
 the tensors we allocate in this version are larger.
 
@@ -33,7 +33,7 @@ the tensors we allocate in this version are larger.
 | EVD          | 10        | 253 ms                       | 209 ms                  | 210 ms            | -           |
 | CN           | 1         | 675 ms                       | 221 ms                  | **207 ms**        | FRO / FP32  |
 | CN           | 1         | 243 ms                       | 169 ms                  | **153 ms**        | FRO / FP16  |
-| NDB          | 1         | x ms                         | 279 ms                  | **264 ms**        | FRO / FP32  |
+| NDB          | 1         | -                            | 279 ms                  | **264 ms**        | FRO / FP32  |
 | NDB          | 1         | 355 ms                       | 284 ms                  | **267 ms**        | PI / FP32   |
  
 **Block size 1024:**
@@ -47,8 +47,8 @@ the tensors we allocate in this version are larger.
 | NDB          | 1         | 558 ms                       | 188 ms                  | **174 ms**           | FRO / FP32  |
 | NDB          | 1         | 740 ms                       | 194 ms                  | **177 ms**           | PI / FP32   |
 
- Comparing the running time of Distributed Shampoo for **CN-1-FP32** and *DASH-GPU* for **CN-1-FP16**, we get a reduction of `666ms / 
- 119ms = 5.6x`, compared to `4.83x` reported in the paper for *DASH-Layerwise*.
+ Comparing the running time of *Distributed Shampoo* for **CN-1-FP32** and *DASH-GPU* for **CN-1-FP16**, we get a reduction of `666ms / 
+ 119ms = 5.6x`, compared to `666ms / 138ms = 4.83x` reported in the paper for *DASH-Layerwise*.
 
 ## Reproducing Experiments
 We use the C4 dataset from [ISTA-DASLab/C4-tokenized-llama2](https://huggingface.co/datasets/ISTA-DASLab/C4-tokenized-llama2) that is 
