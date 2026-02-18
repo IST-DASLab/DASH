@@ -47,8 +47,10 @@ the tensors we allocate in this version are larger.
 | NDB          | 1         | 558 ms                       | 188 ms                  | **174 ms**           | FRO / FP32  |
 | NDB          | 1         | 740 ms                       | 194 ms                  | **177 ms**           | PI / FP32   |
 
- Comparing the running time of *Distributed Shampoo* for **CN-1-FP32** and *DASH-GPU* for **CN-1-FP16**, we get a reduction of `666ms / 
- 119ms = 5.6x`, compared to `666ms / 138ms = 4.83x` reported in the paper for *DASH-Layerwise*.
+Comparing the running time of *Distributed Shampoo* for **CN-1-FP32** and *DASH-GPU* for **CN-1-FP16**, we get a reduction 
+of `666ms / 119ms = 5.6x`, compared to `666ms / 138ms = 4.83x` reported in the paper for *DASH-Layerwise*.
+
+The running times are reported in wandb in `elapsed/opt_step` and they are measured on 8x H100 GPUs with 80GB of memory.
 
 ## Reproducing Experiments
 We use the C4 dataset from [ISTA-DASLab/C4-tokenized-llama2](https://huggingface.co/datasets/ISTA-DASLab/C4-tokenized-llama2) that is 
