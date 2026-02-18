@@ -212,7 +212,7 @@ def main(args):
                 algo_one_dim=DashAlgoOneDim.from_string(args.shmp_algo_one_dim),
 
                 ### EVD
-                evd_heuristic=DashEVDHeuristic.from_string(args.shmp_evd_heuristic),
+                evd_heuristic=DashEvdHeuristic.from_string(args.shmp_evd_heuristic),
 
                 ### CN
                 cn_tolerance=args.shmp_cn_tolerance,
