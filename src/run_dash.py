@@ -199,7 +199,7 @@ def main(MODEL_SIZE, OPTIM, ROOT_METHOD, TOKENS_RATIO, SEQ_LEN, BATCH_SIZE, ACC_
                            'd=${shmp_cbshv_degree}_'
                            'dtype=${shmp_matmul_dtype}_'
                            'mpd=${shmp_max_prec_dim}')
-    elif OPTIM in ['dash-lw']:
+    elif OPTIM in ['dash-lw', 'dash-gpu']:
         if ROOT_METHOD == 'evd':
             wandb_group = ('${opt}_'
                            '${shmp_inv_root_method}_'

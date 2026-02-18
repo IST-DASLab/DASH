@@ -58,7 +58,7 @@ def parse_args(base_parser, args, namespace):
         "adopt", "mars", "shampoo", "scalable-shampoo", "muon", "scion",
         "dion", "dion-s", "dion-r",
         "ns-dct-dion",
-        "dist-shmp", "dash-lw",
+        "dist-shmp", "dash-lw", "dash-gpu",
         "graft-muon",
         "subtrack", "dctadamw",
         "custom-ema-adamw", "frugal-micro-adam", "trion", "trionosd", "trionwadam", "scioned-soap"

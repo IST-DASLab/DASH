@@ -232,7 +232,7 @@ def main(args):
             # final lr is initial_lr/final_div_factor = args.lr / div_factor / final_div_factor
             scheduler = torch.optim.lr_scheduler.OneCycleLR(
                 optimizer=opt,
-                max_lr=[args.lr] if args.opt in ['dist-shmp', 'dash-lw'] else [group.get("lr", args.lr) for group in group_specs],
+                max_lr=[args.lr] if args.opt in ['dist-shmp', 'dash-lw', 'dash-gpu'] else [group.get("lr", args.lr) for group in group_specs],
                 total_steps=args.iterations,
                 pct_start=args.warmup_steps / args.iterations,
                 anneal_strategy=args.scheduler,

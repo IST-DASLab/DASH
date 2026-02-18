@@ -149,7 +149,7 @@ def train(
     if distributed_backend.is_master_process():
         ar_elapsed: ElapsedTime = ElapsedTime() # "ar" means "all-reduced
 
-    if cfg.opt in ['dash-lw']:
+    if cfg.opt in ['dash-lw', 'dash-gpu']:
         opt.log_bucket_stats(path=cfg.results_base_folder)
 
 
@@ -266,7 +266,7 @@ def train(
         t_opt_step_start = time.perf_counter_ns()
         opt.step()
 
-        if cfg.opt in ['dash-lw'] and cfg.shmp_log_stats_interval > 0 and (curr_iter == 1 or curr_iter % cfg.shmp_log_stats_interval == 0):
+        if cfg.opt in ['dash-lw', 'dash-gpu'] and cfg.shmp_log_stats_interval > 0 and (curr_iter == 1 or curr_iter % cfg.shmp_log_stats_interval == 0):
             if dist.is_initialized():
                 if dist.get_rank() == 0:
                     opt.log_layer_stats()
