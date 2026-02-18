@@ -18,7 +18,7 @@ from optim.optim import train
 import distributed
 import config
 
-from ista_daslab_optimizers import *
+from ista_daslab_optimizers import * # imports all DashXyz names
 
 from distributed_shampoo import (
     AdamPreconditionerConfig,
@@ -174,8 +174,9 @@ def main(args):
             preconditioner_config=RootInvShampooPreconditionerConfig(amortized_computation_config=amortized_cfg),
             # shampoo_pt2_compile_config=ShampooPT2CompileConfig(),
         )
-    elif args.opt == 'dash-lw':
-        opt = DashLayerwise(
+    elif args.opt in ['dash-lw', 'dash-gpu']:
+        dash_ctor = DashLayerwise if args.opt == 'dash-lw' else DashGpu
+        opt = dash_ctor(
             model.parameters(),
             lr=args.lr,
             weight_decay=args.weight_decay,

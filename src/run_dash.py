@@ -320,6 +320,7 @@ if __name__ == '__main__':
             # (953, 2048, 20, 32, 64), # GlobalBatchSize = 2M for H100-80GB
         ]:
             for OPTIM, GPUS in [ ########## choose optimizer and GPUs
+                ('dash-gpu', [0, 1, 2, 3, 4, 5, 6, 7]), ########## DashGpu
                 ('dash-lw', [0, 1, 2, 3, 4, 5, 6, 7]), ########## DashLayerwise
                 ('dist-shmp', [0, 1, 2, 3, 4, 5, 6, 7]), ########## DistributedShampoo (our modified version)
             ]:
